@@ -221,7 +221,7 @@ public class AnimatedGifEncoder {
 
 
     public void setDelay(int ms) {
-        delay = Math.round(ms / 10.0f);
+        delay = ms;
     }
 
 

@@ -59,11 +59,11 @@ public class Main {
                 -s, s, s,
                 s, s, s);
 
-        canvas.draw(textures[4],
+        canvas.draw(textures[5],
                 s, s, s,
                 s, s, -s,
                 s, -s, -s);
-        canvas.draw(textures[4],
+        canvas.draw(textures[5],
                 s, -s, -s,
                 s, -s, s,
                 s, s, s);
@@ -247,7 +247,7 @@ public class Main {
         textures[2] = new Gauss(0.5f, 0.8f, 0.5f, p);
         textures[3] = new Gauss(0.5f, 0.5f, 0.8f, p);
         textures[4] = new Gauss(0.5f, 0.5f, 0.2f, p);
-        textures[5] = new Mirror(0.5f, 0.5f, 0.5f);
+        textures[5] = new Mirror(0.8f, 0.8f, 0.8f);
         textures[6] = new Light(0x776699);
         textures[7] = new Light(0x667799);
         textures[8] = new Light(0x669977);
@@ -276,7 +276,7 @@ public class Main {
             for (int i = 0; i < 100; i++) {
                 float a = (float) Math.PI * 0.00003f * (System.currentTimeMillis() - t + 1000f);
                 Model model = build(textures, a);
-                Bitmap map = RayHelper.draw(model, 300, 300, 4000);
+                Bitmap map = RayHelper.draw(model, 300, 300, 5000);
                 javax.swing.SwingUtilities.invokeLater(() -> {
                     label.setIcon(new ImageIcon(BitmapImage.getImage(map)));
                     label.repaint();
@@ -284,18 +284,18 @@ public class Main {
             }
         } else {
             LinkedList<BufferedImage> is = new LinkedList<>();
-            int t = 60;
+            int t = 120;
             int n = t / 2;
-            int si = 200;
+            int si = 400;
             int w = si * si / 20;
             for (int i = 0; i < t; i++) {
-                float s = (float) Math.PI * i / n + 0.001f;
+                float s = (float) Math.PI * i / n + 0.01f;
                 Model m = build(textures, s);
                 Bitmap map = RayHelper.draw(m, si, si, w);
-                is.add(BitmapImage.getImage(map));
+                is.add(BitmapImage.mix(map));
                 System.out.println(i);
             }
-            BitmapImage.toGif(is, 30, "D://1.gif");
+            BitmapImage.toGif(is, 0, "D://1.gif");
         }
     }
 }
